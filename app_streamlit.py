@@ -9,40 +9,59 @@ FONT_PATH = './static/fonts/DejaVuSans.ttf'
 # Tạo thanh bên (sidebar)
 st.sidebar.title("Menu")
 menu_option = st.sidebar.selectbox("Chọn mục", ["Trang chủ", "Thành viên", "Phân loại rác"])
-
+st.markdown("""
+<style>
+    .header {
+        color: #ff6347;
+        font-size: 36px;
+        text-align: center;
+        font-weight: bold;
+    }
+    .subheader {
+        color: #4682b4;
+        font-size: 28px;
+        font-weight: 600;
+    }
+    .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+    }
+    .container img {
+        border-radius: 50%;
+        border: 5px solid #ff6347;
+    }
+    .content {
+        padding: 10px;
+        font-size: 16px;
+        color: #333;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+    }
+</style>
+""", unsafe_allow_html=True)
 # Hiển thị nội dung tương ứng với lựa chọn trong thanh bên
 if menu_option == "Trang chủ":
-    st.title("Mô tả dự án")
+    # Title for "Trang chủ"
+    st.markdown('<div class="header">Mô tả Dự Án</div>', unsafe_allow_html=True)
     st.write("""
     Đây là ứng dụng phân loại rác sử dụng mô hình YOLOv11. Mục tiêu của chúng tôi là giúp người dùng nhận diện các loại rác phổ biến và cung cấp thông tin về cách tái chế mỗi loại.
-    1. **Chai nhựa**: Hãy rửa sạch và đem đến điểm tái chế.
-    2. **Dép lê**: Thu gom và giao cho cơ sở tái chế cao su.
-    3. **Giày**: Tái chế tại các cơ sở chuyên xử lý giày.
-    4. **Hộp xốp**: Làm sạch và tái chế tại điểm tiếp nhận xốp.
-    ...
     """)
 
 elif menu_option == "Thành viên":
-    st.title("Thông tin thành viên")
-    
-    st.write("""
-    Dự án được thực hiện bởi nhóm các thành viên sau:
-    """)
+    # Tiêu đề cho phần thành viên
+    st.markdown('<div class="subheader">Thông tin thành viên</div>', unsafe_allow_html=True)
 
-    # Chia layout thành 2 cột
+    # Layout cho các thành viên
     col1, col2 = st.columns([1, 3])
 
     # Thành viên 1
     with col1:
-        # Đọc ảnh từ file hoặc URL và chuyển thành hình tròn
-        image_path_1 = "images/member.jpg"  # Đường dẫn ảnh thành viên 1
-        image_1 = Image.open(image_path_1)
-        
-        # Chuyển ảnh thành hình tròn
-        image_1 = image_1.resize((150, 150))  # Resize ảnh nếu cần
-        image_1_bytes = BytesIO()
-        image_1.save(image_1_bytes, format="PNG")
-        st.image(image_1_bytes, width=150, use_column_width=False, caption="")
+        image_path = "images/member.jpg"  # Đường dẫn ảnh thành viên
+        image = Image.open(image_path)
+        image = image.resize((150, 150))  # Resize ảnh nếu cần
+        st.image(image, width=150, caption="", use_column_width=False)
 
     with col2:
         st.subheader("Nguyễn Văn A")
@@ -53,44 +72,53 @@ elif menu_option == "Thành viên":
 
     # Thành viên 2
     with col1:
-        # Đọc ảnh từ file hoặc URL và chuyển thành hình tròn
-        image_path_2 = "images/member.jpg"  # Đường dẫn ảnh thành viên 2
-        image_2 = Image.open(image_path_2)
-        
-        # Chuyển ảnh thành hình tròn
-        image_2 = image_2.resize((150, 150))  # Resize ảnh nếu cần
-        image_2_bytes = BytesIO()
-        image_2.save(image_2_bytes, format="PNG")
-        st.image(image_2_bytes, width=150, use_column_width=False, caption="")
+        image_path = "images/member.jpg"  # Đường dẫn ảnh thành viên
+        image = Image.open(image_path)
+        image = image.resize((150, 150))  # Resize ảnh nếu cần
+        st.image(image, width=150, caption="", use_column_width=False)
 
     with col2:
-        st.subheader("Trần Thị B")
+        st.subheader("Nguyễn Văn B")
         st.write("""
-        - Vai trò: Quản lý dự án, thiết kế giao diện người dùng.
-        - Công việc chính: Thiết kế giao diện ứng dụng và quản lý tiến độ dự án.
+        - Vai trò: Lập trình viên, chuyên gia về machine learning.
+        - Công việc chính: Xây dựng mô hình YOLO và huấn luyện mô hình nhận diện rác.
         """)
 
     # Thành viên 3
     with col1:
-        # Đọc ảnh từ file hoặc URL và chuyển thành hình tròn
-        image_path_3 = "images/member.jpg"  # Đường dẫn ảnh thành viên 3
-        image_3 = Image.open(image_path_3)
-        
-        # Chuyển ảnh thành hình tròn
-        image_3 = image_3.resize((150, 150))  # Resize ảnh nếu cần
-        image_3_bytes = BytesIO()
-        image_3.save(image_3_bytes, format="PNG")
-        st.image(image_3_bytes, width=150, use_column_width=False, caption="")
+        image_path = "images/member.jpg"  # Đường dẫn ảnh thành viên
+        image = Image.open(image_path)
+        image = image.resize((150, 150))  # Resize ảnh nếu cần
+        st.image(image, width=150, caption="", use_column_width=False)
 
     with col2:
-        st.subheader("Lê Thị C")
+        st.subheader("Nguyễn Văn C")
         st.write("""
-        - Vai trò: Nghiên cứu và phát triển, chuyên gia về phân loại rác.
-        - Công việc chính: Nghiên cứu các phương pháp phân loại rác hiệu quả và cập nhật cơ sở dữ liệu.
+        - Vai trò: Lập trình viên, chuyên gia về machine learning.
+        - Công việc chính: Xây dựng mô hình YOLO và huấn luyện mô hình nhận diện rác.
         """)
 
 elif menu_option == "Phân loại rác":
-    st.title("Phân Loại Rác với YOLOv11")
+    # Thêm CSS để tạo hiệu ứng hover cho nút
+    st.markdown("""
+    <style>
+        .stButton>button {
+            background-color: #4CAF50;
+            color: white;
+            font-size: 18px;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .stButton>button:hover {
+            background-color: #45a049;
+        }
+    </style>
+    """, unsafe_allow_html=True)
+    
+    st.markdown('<div class="subheader">Phân loại rác với YOLOv11</div>', unsafe_allow_html=True)
     st.write("""
     Đây là ứng dụng phân loại rác sử dụng mô hình YOLOv11. Bạn có thể tải lên một bức ảnh hoặc sử dụng camera để nhận diện rác!
     """)
@@ -124,10 +152,10 @@ elif menu_option == "Phân loại rác":
                 draw.text((x1, y1), label, font=font, fill="red")
 
             # Hiển thị ảnh với bounding box
-            st.image(image, caption="Ảnh đã phân loại", use_column_width=True)
+            st.image(image, caption="", use_column_width=True)
 
             # Hiển thị kết quả phân loại
-            st.subheader("Danh sách các đối tượng được nhận diện:")
+            st.markdown('<div class="content">Danh sách các đối tượng được nhận diện:</div>', unsafe_allow_html=True)
             for result in results:
                 st.write(f"**{result['label']}** - Độ tin cậy: {result['confidence']*100:.2f}%")
                 st.write(f"**Lời khuyên tái chế:** {result['recycle_tip']}")
@@ -192,7 +220,7 @@ elif menu_option == "Phân loại rác":
 
         # Hiển thị ảnh đã xử lý sau khi nhấn nút "Chụp ảnh"
         if image_taken:
-            st.image(processed_image, caption="Ảnh đã phân loại", use_column_width=True)
+            st.image(processed_image, caption="", use_column_width=True)
 
             # Hiển thị kết quả phân loại
             st.subheader("Danh sách các đối tượng được nhận diện:")
