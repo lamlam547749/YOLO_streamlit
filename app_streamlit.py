@@ -1,5 +1,4 @@
 import streamlit as st
-import cv2
 from PIL import Image, ImageDraw, ImageFont
 from yolov11.detect import detect_objects
 from io import BytesIO
@@ -149,7 +148,7 @@ elif menu_option == "Phân loại rác":
                 confidence = result['confidence']
                 x1, y1, x2, y2 = result['box']
                 draw.rectangle([x1, y1, x2, y2], outline="red", width=3)
-                draw.text((x1, y1), label, font=font, fill="red")
+                draw.text((x1, y1), label, font=font, fill="blue")
 
             # Hiển thị ảnh với bounding box
             st.image(image, caption="", use_column_width=True)
@@ -172,7 +171,7 @@ elif menu_option == "Phân loại rác":
             # Tạo đối tượng vẽ và chỉ định phông chữ
             draw = ImageDraw.Draw(processed_image)
             try:
-                font = ImageFont.truetype(FONT_PATH, 40)  # Tăng kích thước phông chữ lên 40
+                font = ImageFont.truetype(FONT_PATH, 20)  # Tăng kích thước phông chữ lên 40
             except IOError:
                 font = ImageFont.load_default()
 
