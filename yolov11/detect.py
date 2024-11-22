@@ -1,6 +1,6 @@
 from ultralytics import YOLO
 
-MODEL_PATH = './yolov11/best.pt'
+MODEL_PATH = './yolov11/yolo11n.pt'
 
 def detect_objects(image):
     # Load model từ file best.pt
@@ -44,6 +44,7 @@ def get_recycle_tip(label):
         'Que kem': 'Có thể tái sử dụng hoặc làm đồ trang trí.',
         'Vỏ kẹo': 'Phân loại vào túi tái chế tổng hợp.',
         'Bao kem': 'Đưa đến điểm tái chế túi nylon.',
-        'Tái chế': 'AAA'
+        'Tái chế': 'AAA',
+        'person': 'Con nguoi'
     }
     return recycle_tips.get(label, 'Không có thông tin tái chế.')

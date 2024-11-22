@@ -161,65 +161,30 @@ elif menu_option == "Phân loại rác":
                 st.write(f"**Lời khuyên tái chế:** {result['recycle_tip']}")
 
     elif input_option == "Dùng Camera":
-        # Khởi động camera
-        cap = cv2.VideoCapture(0)
+        # Sử dụng st.camera_input để lấy hình ảnh từ camera
+        image = st.camera_input("Chụp ảnh từ camera")
 
-        # Kiểm tra nếu webcam không mở được
-        if not cap.isOpened():
-            st.error("Không thể truy cập camera.")
-            st.stop()
+        if image is not None:
+            # Khi có hình ảnh từ camera, xử lý ảnh đã chụp
+            processed_image = Image.open(image)
+            results = detect_objects(processed_image)
 
-        # Hiển thị video feed trong Streamlit
-        stframe = st.empty()
+            # Tạo đối tượng vẽ và chỉ định phông chữ
+            draw = ImageDraw.Draw(processed_image)
+            try:
+                font = ImageFont.truetype(FONT_PATH, 40)  # Tăng kích thước phông chữ lên 40
+            except IOError:
+                font = ImageFont.load_default()
 
-        # Hiển thị và lấy ảnh khi người dùng nhấn nút "Chụp ảnh"
-        capture_button = st.button("Chụp ảnh")
+            # Vẽ bounding boxes lên ảnh
+            for result in results:
+                label = result['label']
+                confidence = result['confidence']
+                x1, y1, x2, y2 = result['box']
+                draw.rectangle([x1, y1, x2, y2], outline="red", width=3)
+                draw.text((x1, y1), label, font=font, fill="blue")
 
-        image_taken = False
-        processed_image = None
-
-        while True:
-            ret, frame = cap.read()
-            if not ret:
-                st.error("Không thể lấy video từ webcam.")
-                break
-
-            # Chuyển đổi từ BGR (OpenCV) sang RGB (Streamlit)
-            frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-            img = Image.fromarray(frame_rgb)
-
-            # Hiển thị video trực tiếp trong Streamlit
-            if not image_taken:  # Chỉ hiển thị video feed nếu chưa chụp ảnh
-                stframe.image(img, channels="RGB", use_column_width=True)
-
-            if capture_button and not image_taken:
-                # Khi nhấn nút, xử lý ảnh đã chụp
-                processed_image = img
-                results = detect_objects(processed_image)
-
-                # Tạo đối tượng vẽ và chỉ định phông chữ
-                draw = ImageDraw.Draw(processed_image)
-                try:
-                    font = ImageFont.truetype(FONT_PATH, 20)
-                except IOError:
-                    font = ImageFont.load_default()
-
-                # Vẽ bounding boxes lên ảnh
-                for result in results:
-                    label = result['label']
-                    confidence = result['confidence']
-                    x1, y1, x2, y2 = result['box']
-                    draw.rectangle([x1, y1, x2, y2], outline="red", width=3)
-                    draw.text((x1, y1), label, font=font, fill="red")
-
-                # Đánh dấu là đã có ảnh đã chụp
-                image_taken = True
-
-                # Dừng vòng lặp sau khi ảnh đã chụp
-                break
-
-        # Hiển thị ảnh đã xử lý sau khi nhấn nút "Chụp ảnh"
-        if image_taken:
+            # Hiển thị ảnh đã xử lý
             st.image(processed_image, caption="", use_column_width=True)
 
             # Hiển thị kết quả phân loại
@@ -227,6 +192,3 @@ elif menu_option == "Phân loại rác":
             for result in results:
                 st.write(f"**{result['label']}** - Độ tin cậy: {result['confidence']*100:.2f}%")
                 st.write(f"**Lời khuyên tái chế:** {result['recycle_tip']}")
-
-        # Giải phóng tài nguyên webcam sau khi hoàn thành
-        cap.release()
