@@ -2,12 +2,19 @@ import streamlit as st
 from PIL import Image, ImageDraw, ImageFont
 from yolov11.detect import detect_objects
 from io import BytesIO
+from streamlit_option_menu import option_menu
 # Đường dẫn đến phông chữ (lưu ý phải tải và cung cấp đường dẫn đúng)
 FONT_PATH = './static/fonts/DejaVuSans.ttf'
 
 # Tạo thanh bên (sidebar)
-st.sidebar.title("Menu")
-menu_option = st.sidebar.selectbox("Chọn mục", ["Trang chủ", "Thành viên", "Phân loại rác"])
+with st.sidebar:
+    menu_option=option_menu(
+        menu_title="Menu",
+        options=['Trang chủ', 'Thành viên', 'Phân loại rác'],
+        icons=['house', 'people', 'camera'],
+        menu_icon="cast",
+    )
+# menu_option = st.sidebar.selectbox("Chọn mục", ["Trang chủ", "Thành viên", "Phân loại rác"])
 st.markdown("""
 <style>
     .header {
@@ -60,7 +67,7 @@ elif menu_option == "Thành viên":
         image_path = "images/member.jpg"  # Đường dẫn ảnh thành viên
         image = Image.open(image_path)
         image = image.resize((150, 150))  # Resize ảnh nếu cần
-        st.image(image, width=150, caption="", use_column_width=False)
+        st.image(image, width=150, caption="", use_container_width =False)
 
     with col2:
         st.subheader("Nguyễn Văn A")
@@ -74,7 +81,7 @@ elif menu_option == "Thành viên":
         image_path = "images/member.jpg"  # Đường dẫn ảnh thành viên
         image = Image.open(image_path)
         image = image.resize((150, 150))  # Resize ảnh nếu cần
-        st.image(image, width=150, caption="", use_column_width=False)
+        st.image(image, width=150, caption="", use_container_width =False)
 
     with col2:
         st.subheader("Nguyễn Văn B")
@@ -88,7 +95,7 @@ elif menu_option == "Thành viên":
         image_path = "images/member.jpg"  # Đường dẫn ảnh thành viên
         image = Image.open(image_path)
         image = image.resize((150, 150))  # Resize ảnh nếu cần
-        st.image(image, width=150, caption="", use_column_width=False)
+        st.image(image, width=150, caption="", use_container_width =False)
 
     with col2:
         st.subheader("Nguyễn Văn C")
@@ -151,7 +158,7 @@ elif menu_option == "Phân loại rác":
                 draw.text((x1, y1), label, font=font, fill="blue")
 
             # Hiển thị ảnh với bounding box
-            st.image(image, caption="", use_column_width=True)
+            st.image(image, caption="", use_container_width =True)
 
             # Hiển thị kết quả phân loại
             st.markdown('<div class="content">Danh sách các đối tượng được nhận diện:</div>', unsafe_allow_html=True)
@@ -184,7 +191,7 @@ elif menu_option == "Phân loại rác":
                 draw.text((x1, y1), label, font=font, fill="blue")
 
             # Hiển thị ảnh đã xử lý
-            st.image(processed_image, caption="", use_column_width=True)
+            st.image(processed_image, caption="", use_container_width =True)
 
             # Hiển thị kết quả phân loại
             st.subheader("Danh sách các đối tượng được nhận diện:")
