@@ -6,10 +6,12 @@ from streamlit_option_menu import option_menu
 # Đường dẫn đến phông chữ (lưu ý phải tải và cung cấp đường dẫn đúng)
 FONT_PATH = './static/fonts/DejaVuSans.ttf'
 
-# Tạo thanh bên (sidebar)
 with st.sidebar:
-    menu_option=option_menu(
-        menu_title="Menu",
+    st.image("images/member.jpg", width=300)  # Đặt đường dẫn đến hình ảnh của bạn tại đây
+
+    # Tạo menu chọn mục
+    menu_option = option_menu(
+        menu_title=None,  # Không dùng tiêu đề mặc định
         options=['Trang chủ', 'Thành viên', 'Phân loại rác'],
         icons=['house', 'people', 'camera'],
         menu_icon="cast",
