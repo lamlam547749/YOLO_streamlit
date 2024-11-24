@@ -1,6 +1,6 @@
 from ultralytics import YOLO
 
-MODEL_PATH = './yolov11/yolo11n.pt'
+MODEL_PATH = './yolov11/best.pt'
 
 def detect_objects(image):
     # Load model từ file best.pt
