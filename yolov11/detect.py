@@ -23,28 +23,34 @@ def detect_objects(image):
         output.append({
             'label': label,
             'confidence': confidence,
-            'box': (x1, y1, x2, y2),  # Tọa độ bounding box
-            'recycle_tip': get_recycle_tip(label)  # Gợi ý tái chế
+            'box': (x1, y1, x2, y2),
+            'recycle_info': get_recycle_tip(label)  # Thông tin chi tiết
         })
 
     return output
 
 def get_recycle_tip(label):
     recycle_tips = {
-        'Chai nhựa': 'Hãy rửa sạch và đem đến điểm tái chế.',
-        'Dép lê': 'Thu gom và giao cho cơ sở tái chế cao su.',
-        'Giày': 'Tái chế tại các cơ sở chuyên xử lý giày.',
-        'Hộp xốp': 'Làm sạch và tái chế tại điểm tiếp nhận xốp.',
-        'Ly Nhựa': 'Rửa sạch và tái chế.',
-        'Nắp nhựa': 'Gỡ ra và thu gom tại điểm tái chế nhựa.',
-        'Ống hút nhựa': 'Thu gom vào túi nhựa tái chế.',
-        'Khăn giấy': 'Sử dụng làm phân xanh hoặc đốt cháy.',
-        'Nắp chai': 'Thu gom và đưa đến nơi tái chế kim loại.',
-        'Nhãn chai nước': 'Bóc ra và phân loại theo nhựa.',
-        'Que kem': 'Có thể tái sử dụng hoặc làm đồ trang trí.',
-        'Vỏ kẹo': 'Phân loại vào túi tái chế tổng hợp.',
-        'Bao kem': 'Đưa đến điểm tái chế túi nylon.',
-        'Tái chế': 'AAA',
-        'person': 'Con nguoi'
+        'Chai nhựa': {
+            'type': 'Rác tái chế',
+            'materials': ['Nhựa PET'],
+            'tips': 'Dùng chai nhựa làm chậu cây hoặc hệ thống tưới tự động, tạo các món đồ thủ công cho trẻ em như heo đất, hộp bút, đèn lồng, giỏ đựng đồ.'
+        },
+        'Dép lê': {
+            'type': 'Rác khó tái chế',
+            'materials': ['Cao su', 'Nhựa tổng hợp'],
+            'tips': 'Có thể tái sử dụng làm vật dụng trong nhà (tấm lót nồi, lót chân ghế), làm đồ chơi hoặc đồ trang trí.'
+        },
+        'Giày': {
+            'type': 'Rác tái chế',
+            'materials': ['Da', 'Cao su'],
+            'tips': 'Sửa chữa để tái sử dụng, tái chế thành đồ dùng như chậu cây mini, túi đựng dụng cụ hoặc bán lại, từ thiện nếu còn tốt.'
+        },
+        # Thêm các loại rác khác
     }
-    return recycle_tips.get(label, 'Không có thông tin tái chế.')
+    return recycle_tips.get(label, {
+        'type': 'Không xác định',
+        'materials': ['Không xác định'],
+        'tips': 'Không có thông tin tái chế.'
+    })
+

@@ -165,8 +165,16 @@ elif menu_option == "Phân loại rác":
             # Hiển thị kết quả phân loại
             st.markdown('<div class="content">Danh sách các đối tượng được nhận diện:</div>', unsafe_allow_html=True)
             for result in results:
-                st.write(f"**{result['label']}** - Độ tin cậy: {result['confidence']*100:.2f}%")
-                st.write(f"**Lời khuyên tái chế:** {result['recycle_tip']}")
+                label = result['label']
+                confidence = result['confidence']
+                recycle_info = result['recycle_info']
+
+                # Định dạng hiển thị thông tin
+                st.write(f"""
+                **{label}** (**{recycle_info['type']}**): {', '.join(recycle_info['materials'])}.
+                
+                **Cách tái chế tại nhà**: {recycle_info['tips']}
+                """)
 
     elif input_option == "Dùng Camera":
         # Sử dụng st.camera_input để lấy hình ảnh từ camera
@@ -196,7 +204,15 @@ elif menu_option == "Phân loại rác":
             st.image(processed_image, caption="", use_container_width =True)
 
             # Hiển thị kết quả phân loại
-            st.subheader("Danh sách các đối tượng được nhận diện:")
+            st.markdown('<div class="content">Danh sách các đối tượng được nhận diện:</div>', unsafe_allow_html=True)
             for result in results:
-                st.write(f"**{result['label']}** - Độ tin cậy: {result['confidence']*100:.2f}%")
-                st.write(f"**Lời khuyên tái chế:** {result['recycle_tip']}")
+                label = result['label']
+                confidence = result['confidence']
+                recycle_info = result['recycle_info']
+
+                # Định dạng hiển thị thông tin
+                st.write(f"""
+                **{label}** (**{recycle_info['type']}**): {', '.join(recycle_info['materials'])}.
+                
+                **Cách tái chế tại nhà**: {recycle_info['tips']}
+                """)
