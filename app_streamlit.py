@@ -7,7 +7,7 @@ from streamlit_option_menu import option_menu
 FONT_PATH = './static/fonts/DejaVuSans.ttf'
 
 with st.sidebar:
-    st.image("images/Logo.jpeg", width=300)  # Đặt đường dẫn đến hình ảnh của bạn tại đây
+    st.image("images/Logo.png", width=300)  # Đặt đường dẫn đến hình ảnh của bạn tại đây
 
     # Tạo menu chọn mục
     menu_option = option_menu(
@@ -191,12 +191,12 @@ elif menu_option == "Phân loại rác":
             st.markdown('<div class="content">Danh sách các đối tượng được nhận diện:</div>', unsafe_allow_html=True)
             for result in results:
                 label = result['label']
-                confidence = result['confidence']
+                confidence = round(result['confidence'],3)
                 recycle_info = result['recycle_info']
 
                 # Định dạng hiển thị thông tin
                 st.write(f"""
-                **{label}**  (**{recycle_info['type']}**): {', '.join(recycle_info['materials'])}.
+                **{label}** (**{recycle_info['type']}**): {', '.join(recycle_info['materials'])}.
                 
                 **Cách tái chế tại nhà**: {recycle_info['tips']}
                 """)
@@ -232,12 +232,12 @@ elif menu_option == "Phân loại rác":
             st.markdown('<div class="content">Danh sách các đối tượng được nhận diện:</div>', unsafe_allow_html=True)
             for result in results:
                 label = result['label']
-                confidence = result['confidence']
+                confidence = round(result['confidence'],3)
                 recycle_info = result['recycle_info']
 
                 # Định dạng hiển thị thông tin
                 st.write(f"""
-                **{label}**  (**{recycle_info['type']}**): {', '.join(recycle_info['materials'])}.
+                **{label}** (**{recycle_info['type']}**): {', '.join(recycle_info['materials'])}.
                 
                 **Cách tái chế tại nhà**: {recycle_info['tips']}
                 """)
