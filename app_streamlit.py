@@ -7,7 +7,7 @@ from streamlit_option_menu import option_menu
 FONT_PATH = './static/fonts/DejaVuSans.ttf'
 
 with st.sidebar:
-    st.image("images/member.jpg", width=300)  # Đặt đường dẫn đến hình ảnh của bạn tại đây
+    st.image("images/Logo.jpeg", width=300)  # Đặt đường dẫn đến hình ảnh của bạn tại đây
 
     # Tạo menu chọn mục
     menu_option = option_menu(
@@ -52,9 +52,32 @@ st.markdown("""
 # Hiển thị nội dung tương ứng với lựa chọn trong thanh bên
 if menu_option == "Trang chủ":
     # Title for "Trang chủ"
-    st.markdown('<div class="header">Mô tả Dự Án</div>', unsafe_allow_html=True)
+    st.markdown('<div class="header">Giới thiệu dự án</div>', unsafe_allow_html=True)
     st.write("""
-    Đây là ứng dụng phân loại rác sử dụng mô hình YOLOv11. Mục tiêu của chúng tôi là giúp người dùng nhận diện các loại rác phổ biến và cung cấp thông tin về cách tái chế mỗi loại.
+    **Tên dự án:** EnRonC  
+
+              
+    **Mục đích:** Phân loại rác và giáo dục, cung cấp thông tin về rác thải nhằm nâng cao nhận thức về môi trường.  
+
+             
+    **Đối tượng sử dụng:**  
+    - Tất cả những người quan tâm tới môi trường.  
+             
+    - Những người muốn tìm hiểu thêm kiến thức hoặc cải thiện lối sống xanh.  
+
+             
+    **Tính năng chính:**  
+    - Cung cấp thông tin về các loại rác và tính chất của chúng (được chia thành rác tái chế được và không tái chế được).  
+             
+    - Gợi ý ý tưởng tái chế để đưa rác vào sử dụng lại trong đời sống.  
+             
+    - Nhận diện và phân biệt loại rác qua hình ảnh hoặc camera, giúp người dùng xử lý đúng cách.  
+
+             
+    **Ứng dụng thực tế:**  
+    - Hỗ trợ trong đời sống hàng ngày, đặc biệt đối với rác thải sinh hoạt.  
+             
+    - Góp phần nâng cao ý thức về môi trường, hướng tới lối sống xanh và tiến đến môi trường bền vững.  
     """)
 
 elif menu_option == "Thành viên":
@@ -66,44 +89,44 @@ elif menu_option == "Thành viên":
 
     # Thành viên 1
     with col1:
-        image_path = "images/member.jpg"  # Đường dẫn ảnh thành viên
+        image_path = "images/leader_resized.jpg"  # Đường dẫn ảnh thành viên
         image = Image.open(image_path)
         image = image.resize((150, 150))  # Resize ảnh nếu cần
-        st.image(image, width=150, caption="", use_container_width =False)
+        st.image(image,width=150, caption="", use_container_width =False)
 
     with col2:
-        st.subheader("Nguyễn Văn A")
+        st.subheader("Nguyễn Lê Trung Nghĩa - 10A1")
         st.write("""
-        - Vai trò: Lập trình viên, chuyên gia về machine learning.
-        - Công việc chính: Xây dựng mô hình YOLO và huấn luyện mô hình nhận diện rác.
+        - Vai trò: Nhóm trưởng, Lập trình viên chính
+        - Công việc chính: Quản lý dự án, thiết kế và triển khai mô hình để phân loại rác.
         """)
 
     # Thành viên 2
     with col1:
-        image_path = "images/member.jpg"  # Đường dẫn ảnh thành viên
+        image_path = "images/member1_resized.jpg"  # Đường dẫn ảnh thành viên
         image = Image.open(image_path)
         image = image.resize((150, 150))  # Resize ảnh nếu cần
         st.image(image, width=150, caption="", use_container_width =False)
 
     with col2:
-        st.subheader("Nguyễn Văn B")
+        st.subheader("Lê Mai Khánh Chi - 11A4")
         st.write("""
-        - Vai trò: Lập trình viên, chuyên gia về machine learning.
-        - Công việc chính: Xây dựng mô hình YOLO và huấn luyện mô hình nhận diện rác.
+        - Vai trò: Thành viên
+        - Công việc chính: Nghiên cứu thị trường, thu thập dữ liệu để đảm bảo mô hình phân loại rác có tính ứng dụng cao.
         """)
 
     # Thành viên 3
     with col1:
-        image_path = "images/member.jpg"  # Đường dẫn ảnh thành viên
+        image_path = "images/member2_resized.jpg"  # Đường dẫn ảnh thành viên
         image = Image.open(image_path)
         image = image.resize((150, 150))  # Resize ảnh nếu cần
         st.image(image, width=150, caption="", use_container_width =False)
 
     with col2:
-        st.subheader("Nguyễn Văn C")
+        st.subheader("Châu Bảo Quyên - 12A7")
         st.write("""
-        - Vai trò: Lập trình viên, chuyên gia về machine learning.
-        - Công việc chính: Xây dựng mô hình YOLO và huấn luyện mô hình nhận diện rác.
+        - Vai trò: Thành viên
+        - Công việc chính: Hỗ trợ thu thập dữ liệu và đóng góp vào việc phát triển hệ thống.
         """)
 
 elif menu_option == "Phân loại rác":
@@ -126,9 +149,11 @@ elif menu_option == "Phân loại rác":
     </style>
     """, unsafe_allow_html=True)
     
-    st.markdown('<div class="subheader">Phân loại rác với YOLOv11</div>', unsafe_allow_html=True)
+    st.markdown('<div class="subheader">Phân loại rác với EnRonC</div>', unsafe_allow_html=True)
     st.write("""
-    Đây là ứng dụng phân loại rác sử dụng mô hình YOLOv11. Bạn có thể tải lên một bức ảnh hoặc sử dụng camera để nhận diện rác!
+    **Chào mừng bạn đến với tính năng Phân loại rác của EnRonC!**  
+    - **Nhận diện rác qua ảnh**: Tải lên hình ảnh để phân loại các loại rác thải.  
+    - **Sử dụng camera**: Chụp ảnh trực tiếp từ thiết bị của bạn để phân biệt loại rác.  
     """)
 
     # Chọn giữa việc upload ảnh hoặc sử dụng camera
@@ -171,7 +196,7 @@ elif menu_option == "Phân loại rác":
 
                 # Định dạng hiển thị thông tin
                 st.write(f"""
-                **{label}** (**{recycle_info['type']}**): {', '.join(recycle_info['materials'])}.
+                **{label}**  (**{recycle_info['type']}**): {', '.join(recycle_info['materials'])}.
                 
                 **Cách tái chế tại nhà**: {recycle_info['tips']}
                 """)
@@ -212,7 +237,7 @@ elif menu_option == "Phân loại rác":
 
                 # Định dạng hiển thị thông tin
                 st.write(f"""
-                **{label}** (**{recycle_info['type']}**): {', '.join(recycle_info['materials'])}.
+                **{label}**  (**{recycle_info['type']}**): {', '.join(recycle_info['materials'])}.
                 
                 **Cách tái chế tại nhà**: {recycle_info['tips']}
                 """)
