@@ -196,7 +196,9 @@ elif menu_option == "Phân loại rác":
 
                 # Định dạng hiển thị thông tin
                 st.write(f"""
-                **{label}** (**{recycle_info['type']}**): {', '.join(recycle_info['materials'])}.
+                **{label}** - Độ tin cậy: **{confidence:.3f}**
+
+                Loại **{recycle_info['type']}**: {', '.join(recycle_info['materials'])}.
                 
                 **Cách tái chế tại nhà**: {recycle_info['tips']}
                 """)
@@ -237,7 +239,9 @@ elif menu_option == "Phân loại rác":
 
                 # Định dạng hiển thị thông tin
                 st.write(f"""
-                **{label}** (**{recycle_info['type']}**): {', '.join(recycle_info['materials'])}.
+                **{label}** - Độ tin cậy: **{confidence:.3f}**
+                
+                Loại **{recycle_info['type']}**: {', '.join(recycle_info['materials'])}.
                 
                 **Cách tái chế tại nhà**: {recycle_info['tips']}
                 """)
